@@ -1,2 +1,2 @@
 # miranda-dashboard-backend
- Back-end project with node.js + express for miranda dashboard
+ Back-end API project with node.js + express for miranda dashboard
