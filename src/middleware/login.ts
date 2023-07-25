@@ -1,4 +1,18 @@
-import { Request, Response, NextFunction } from 'express';
+import authService from "../services/login";
+import { NextFunction, Request, Response } from "express";
+
+export default function authMiddleware(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  // Get the jwt token from the headers and verify it
+}
+
+
+
+
+/* import { Request, Response, NextFunction } from 'express';
 
 const hardcodedUser = {
     email: 'admin@admin.com',
@@ -13,3 +27,4 @@ export const checkAuthentication = (req: Request, res: Response, next: NextFunct
         res.status(401).json({ message: 'Authentication failed' });
     }
 };
+ */

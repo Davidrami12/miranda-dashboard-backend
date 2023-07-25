@@ -1,29 +1,20 @@
-import express from 'express';
-import { json, urlencoded } from 'body-parser';
+import { bookingsController } from "./controllers/booking";
+import { loginController } from "./controllers/login";
 
-// Importación de los routers de cada controlador
-/* import loginRouter from './controllers/login';
-import roomRouter from './controllers/room';
-import bookingRouter from './controllers/booking';
-import userRouter from './controllers/user';
-import contactRouter from './controllers/contact'; */
+import authMiddleware from "./middleware/login";
+import express from "express";
 
-const app = express();
-
-// Configuración de middlewares
-app.use(json());
-app.use(urlencoded({ extended: false }));
-
+export const app = express();
 
 app.get('/', (req, res) => {
     res.send('API running on root path');
 });
 
-// Configuración de rutas
-/* app.use('/login', loginRouter);
-app.use('/room', roomRouter);
-app.use('/booking', bookingRouter);
-app.use('/user', userRouter);
-app.use('/contact', contactRouter); */
+// middlewares
+app.use(express.json());
 
-export default app;
+// public routes
+app.use("/login", loginController);
+
+// private routes
+app.use("/booking", authMiddleware, bookingsController);
