@@ -7,6 +7,7 @@ export const getBookings = async (req: express.Request, res: express.Response) =
   try {
     const response = await getBookingsService(req, res);
     res.status(200).json(response);
+    
   } catch (error: any) {
     res.status(400).json({ error: error.message });
   }
@@ -17,6 +18,7 @@ export const getBooking = async (req: express.Request, res: express.Response) =>
   try {
     const response = await getBookingService(req, res);
     res.status(200).json(response);
+
   } catch (error: any) {
     res.status(400).json({ error: error.message });
   }
@@ -27,6 +29,7 @@ export const postBooking = async (req: express.Request<{},{},BookingInterface> ,
   try {
     const response = await postBookingService(req, res);
     res.status(200).json(response);
+
   } catch (error: any) {
     res.status(400).json({ error: error.message });
   }
@@ -37,6 +40,7 @@ export const deleteBooking = async (req: express.Request<{id: string}>, res: exp
   try {
     const response = await deleteBookingService(req, res);
     res.status(200).json(response);
+
   } catch (error: any) {
     res.status(400).json({ error: error.message });
   }
@@ -44,10 +48,10 @@ export const deleteBooking = async (req: express.Request<{id: string}>, res: exp
 
 //UPDATE booking
 export const updateBooking = async (req: express.Request, res: express.Response) => {
- 
   try {
     const response = await updateBookingService(req, res);
     res.status(200).json(response);
+
   } catch (error: any) {
     res.status(400).json({ error: error.message });
   }
