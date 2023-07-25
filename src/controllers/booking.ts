@@ -1,37 +1,54 @@
-import { Request, Response, Router } from "express";
-
+import express from "express";
 import { BookingInterface } from "../models/booking";
+import { deleteBookingService, getBookingService, getBookingsService, postBookingService, updateBookingService } from "../services/booking";
 
-export const bookingsController = Router();
-
-bookingsController.get("/", async (req: Request, res: Response) => {
-  // Get all bookings
-});
-
-bookingsController.get(
-  ":id",
-  async (req: Request<{ id: number }>, res: Response) => {
-    // Get a booking by id
+//GET all bookings
+export const getBookings = async (req: express.Request, res: express.Response) => {
+  try {
+    const response = await getBookingsService(req, res);
+    res.status(200).json(response);
+  } catch (error: any) {
+    res.status(400).json({ error: error.message });
   }
-);
+};
 
-bookingsController.post(
-  "/",
-  async (req: Request<{}, {}, BookingInterface>, res: Response) => {
-    // Save a booking
+//GET booking by id
+export const getBooking = async (req: express.Request, res: express.Response) => {
+  try {
+    const response = await getBookingService(req, res);
+    res.status(200).json(response);
+  } catch (error: any) {
+    res.status(400).json({ error: error.message });
   }
-);
+};
 
-bookingsController.put(
-  "/:id",
-  async (req: Request<{ id: number }, {}, BookingInterface>, res: Response) => {
-    // Update a booking by id
+//POST new Booking
+export const postBooking = async (req: express.Request<{},{},BookingInterface> , res: express.Response) => {
+  try {
+    const response = await postBookingService(req, res);
+    res.status(200).json(response);
+  } catch (error: any) {
+    res.status(400).json({ error: error.message });
   }
-);
+};
 
-bookingsController.delete(
-  "/:id",
-  async (req: Request<{ id: number }>, res: Response) => {
-    // Delete a booking by id
+//DELETE booking
+export const deleteBooking = async (req: express.Request<{id: string}>, res: express.Response) => {
+  try {
+    const response = await deleteBookingService(req, res);
+    res.status(200).json(response);
+  } catch (error: any) {
+    res.status(400).json({ error: error.message });
   }
-);
+};
+
+//UPDATE booking
+export const updateBooking = async (req: express.Request, res: express.Response) => {
+ 
+  try {
+    const response = await updateBookingService(req, res);
+    res.status(200).json(response);
+  } catch (error: any) {
+    res.status(400).json({ error: error.message });
+  }
+};

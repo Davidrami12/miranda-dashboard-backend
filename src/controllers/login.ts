@@ -1,14 +1,15 @@
-import authService from "../services/login";
-import { Request, Response, Router } from "express";
+import express from 'express';
+import { loginService } from '../services/login';
 
-export const loginController = Router();
+export const loginRoutes = express.Router();
 
-loginController.post(
-  "/",
-  async (
-    req: Request<{}, {}, { user: string; pass: string }>,
-    res: Response
-  ) => {
-    // Return jwt token if the username and password are correct
-  }
-);
+const loginController = async (req: express.Request , res: express.Response) => {
+    try {
+      const response = await loginService(req, res);
+      res.status(200).json(response);
+    } catch (error: any) {
+      res.status(400).json({ error: error.message });
+    }
+  };
+
+loginRoutes.post("/", loginController)

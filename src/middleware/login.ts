@@ -1,30 +1,20 @@
-import authService from "../services/login";
-import { NextFunction, Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
+import jwt from 'jsonwebtoken';
 
-export default function authMiddleware(
-  req: Request,
-  res: Response,
-  next: NextFunction
-) {
-  // Get the jwt token from the headers and verify it
+export function authenticateToken(req: Request, res: Response, next: NextFunction) {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+
+  if (token == null) return res.sendStatus(401).json({
+    auth: false,
+    message: 'No token provided'
+  })
+
+  jwt.verify(token, process.env.TOKEN_SECRET as string, (err: any, user: any) => {
+    console.log(err);
+
+    if (err) return res.sendStatus(403);
+
+    next();
+  })
 }
-
-
-
-
-/* import { Request, Response, NextFunction } from 'express';
-
-const hardcodedUser = {
-    email: 'admin@admin.com',
-    password: 'Admin123',
-};
-
-export const checkAuthentication = (req: Request, res: Response, next: NextFunction) => {
-    const { email, password } = req.body;
-    if (email === hardcodedUser.email && password === hardcodedUser.password) {
-        next();
-    } else {
-        res.status(401).json({ message: 'Authentication failed' });
-    }
-};
- */

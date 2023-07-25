@@ -1,32 +1,51 @@
-import bookingsJSON from "../data/bookings.json";
-import { Booking } from "../models/booking";
+import fs from "fs";
+import path from "path";
+import express from "express";
+import { BookingInterface } from "../models/booking";
+import uuid from "react-uuid";
 
-export const bookings = bookingsJSON as Booking[];
+const directory = path.join(__dirname, "..", "data", "bookings.json");
+const readBookings = fs.readFileSync(directory, "utf8");
+const bookingsJson = JSON.parse(readBookings);
 
-async function get() {
-  // Get all bookings from json file
-}
+export const getBookingsService = async (req: express.Request, res: express.Response) => {
+  res.send(readBookings);
+};
 
-async function getById(bookingId: number) {
-  // Get a booking by id from json file
-}
+export const getBookingService = async (req: express.Request, res: express.Response) => {
+  const { id } = req.params;
+  const booking = bookingsJson.find((booking: BookingInterface) => booking.id === id);
+  res.send(JSON.stringify(booking));
+};
 
-async function post(booking: Booking) {
-  // Save a booking to json file
-}
+export const postBookingService = async (req: express.Request, res: express.Response) => {
+  const newBooking: BookingInterface = { ...req.body, id: uuid() };
+  bookingsJson.push(newBooking);
+  fs.writeFileSync(directory, JSON.stringify(bookingsJson));
+  const newReadBookings = fs.readFileSync(directory, "utf8");
+  res.send(newReadBookings);
+};
 
-async function put(bookingId: number, update: Partial<Booking>) {
-  // Update a booking by id and save to json file
-}
+export const deleteBookingService = async (req: express.Request, res: express.Response) => {
+  const { id } = req.params;
+  const newArray = bookingsJson.filter((booking: BookingInterface) => booking.id !== id);
+  fs.writeFileSync(directory, JSON.stringify(newArray));
+  const newReadBookings = fs.readFileSync(directory, "utf8");
+  res.send(newReadBookings);
+};
 
-async function _delete(bookingId: number) {
-  // Delete a booking by id from json file
-}
+export const updateBookingService = async (req: express.Request, res: express.Response) => {
+  const { id } = req.params;
+  let newArray: BookingInterface[] = [];
+  let booking: BookingInterface | undefined = bookingsJson.find((booking: BookingInterface) => booking.id === id);
+  booking = { ...booking, ...req.body };
 
-export const bookingService = {
-  get,
-  getById,
-  post,
-  put,
-  delete: _delete,
+  if (booking) {
+    newArray = bookingsJson.filter((bookingFilt: BookingInterface) => bookingFilt.id !== id);
+    newArray.push(booking);
+  }
+  
+  fs.writeFileSync(directory, JSON.stringify(newArray));
+  const newReadBookings = fs.readFileSync(directory, "utf8");
+  res.send(newReadBookings);
 };
