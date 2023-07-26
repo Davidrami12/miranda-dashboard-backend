@@ -9,7 +9,7 @@ roomRoutes.get('/', getRooms);
 //GET single room
 roomRoutes.get('/:id', getRoom);
 
-//POST new Room
+//POST new room
 roomRoutes.post('/', postRoom);
 
 //DELETE room

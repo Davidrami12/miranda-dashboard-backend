@@ -10,6 +10,7 @@ import { loginRoutes } from './controllers/login';
 import { bookingRoutes } from './routes/bookings'
 import { roomRoutes } from './routes/rooms';
 import { userRoutes } from './routes/users';
+import { contactRoutes } from './routes/contact';
 
 export const app = express();
 export const PORT = process.env.PORT || 3000;
@@ -29,3 +30,4 @@ app.use('/login', loginRoutes);
 app.use('/bookings', authenticateToken, bookingRoutes);
 app.use('/rooms', authenticateToken, roomRoutes);
 app.use('/users', authenticateToken, userRoutes);
+app.use('/contacts', authenticateToken, contactRoutes);

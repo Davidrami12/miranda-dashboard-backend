@@ -1,5 +1,5 @@
-export interface contactInterface{
-  id: number,
+export interface ContactInterface{
+  id: string,
   date: string,
   customer: string,
   comment: string,

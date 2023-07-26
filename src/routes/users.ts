@@ -9,7 +9,7 @@ userRoutes.get('/', getUsers);
 //GET single user
 userRoutes.get('/:id', getUser);
 
-//POST new User
+//POST new user
 userRoutes.post('/', postUser);
 
 //DELETE user
