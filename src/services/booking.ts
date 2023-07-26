@@ -9,7 +9,8 @@ const readBookings = fs.readFileSync(directory, "utf8");
 const bookingsJson = JSON.parse(readBookings);
 
 export const getBookingsService = async (req: express.Request, res: express.Response) => {
-  //res.json(bookings);
+  // const response = bookings;
+  // res.status(200).json(response);
   return readBookings; 
 };
 
