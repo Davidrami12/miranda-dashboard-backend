@@ -8,7 +8,7 @@ interface Request extends ExpressRequest {
 export function authenticateToken(req: Request, res: Response, next: NextFunction) {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
-
+  
   if (token == null) {
     return res.status(401).json({
       auth: false,
@@ -25,7 +25,6 @@ export function authenticateToken(req: Request, res: Response, next: NextFunctio
       });
     }
 
-    req.user = user;
     next();
   });
 }

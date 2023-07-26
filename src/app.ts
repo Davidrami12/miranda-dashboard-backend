@@ -7,7 +7,7 @@ import { authenticateToken } from './middleware/login';
 import { loginRoutes } from './controllers/login';
 
 export const app = express();
-export const PORT = process.env.PORT;
+export const PORT = process.env.PORT || 3000;
 
 app.get('/', (req, res) => {
     res.send('API running on root path');
@@ -18,8 +18,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // public routes
-app.use('/api/login', loginRoutes);
+app.use('/login', loginRoutes);
 
 // private routes
-app.use('/api/bookings', authenticateToken, bookingRoutes);
-// app.use('/api/rooms', authenticateToken, roomRoutes);
+app.use('/bookings', authenticateToken, bookingRoutes);
+// app.use('/rooms', authenticateToken, roomRoutes);
