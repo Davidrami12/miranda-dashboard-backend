@@ -9,6 +9,7 @@ import { authenticateToken } from './middleware/login';
 import { loginRoutes } from './controllers/login';
 import { bookingRoutes } from './routes/bookings'
 import { roomRoutes } from './routes/rooms';
+import { userRoutes } from './routes/users';
 
 export const app = express();
 export const PORT = process.env.PORT || 3000;
@@ -27,3 +28,4 @@ app.use('/login', loginRoutes);
 // private routes
 app.use('/bookings', authenticateToken, bookingRoutes);
 app.use('/rooms', authenticateToken, roomRoutes);
+app.use('/users', authenticateToken, userRoutes);
