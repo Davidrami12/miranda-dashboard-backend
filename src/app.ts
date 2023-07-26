@@ -16,10 +16,9 @@ app.get('/', (req, res) => {
 // middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use('/api/login', loginRoutes);
 
 // public routes
-//app.use('/api/info', infoRoute)
+app.use('/api/login', loginRoutes);
 
 // private routes
 app.use('/api/bookings', authenticateToken, bookingRoutes);

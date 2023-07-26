@@ -1,5 +1,9 @@
-import { Request, Response, NextFunction } from "express";
+import { Request as ExpressRequest, Response, NextFunction } from "express";
 import jwt from 'jsonwebtoken';
+
+interface Request extends ExpressRequest {
+  user?: any;
+}
 
 export function authenticateToken(req: Request, res: Response, next: NextFunction) {
   const authHeader = req.headers['authorization'];
@@ -13,15 +17,15 @@ export function authenticateToken(req: Request, res: Response, next: NextFunctio
   }
 
   jwt.verify(token, process.env.TOKEN_SECRET as string, (err: any, user: any) => {
+    if (err) {
       console.log(err);
+      return res.status(403).json({
+        auth: false,
+        message: 'Token is not valid'
+      });
+    }
 
-      if (err) {
-        return res.status(403).json({
-          auth: false,
-          message: 'Token is not valid'
-        });
-      }
-
-      next();
+    req.user = user;
+    next();
   });
 }
