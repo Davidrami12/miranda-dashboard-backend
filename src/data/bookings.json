@@ -1,17 +1,5 @@
 [
   {
-    "id": 1,
-    "bookingID": 135478,
-    "userName": "Kendrick Lamar",
-    "userPicture": "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
-    "orderDate": "12/06/2023",
-    "checkIn": "2023-11-04",
-    "checkOut": "2023-12-01",
-    "specialRequest": "",
-    "roomType": "Single Bed",
-    "status": "Check Out"
-  },
-  {
     "id": 2,
     "bookingID": 3460,
     "userName": "Colin Keebler",
@@ -22,18 +10,6 @@
     "specialRequest": "",
     "roomType": "Suite",
     "status": "In Progress"
-  },
-  {
-    "id": 3,
-    "bookingID": 9915,
-    "userName": "Sylvester Zieme",
-    "userPicture": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
-    "orderDate": "26/06/2023",
-    "checkIn": "2023-11-04",
-    "checkOut": "2023-12-01",
-    "specialRequest": "",
-    "roomType": "Double Bed",
-    "status": "Check Out"
   },
   {
     "id": 4,

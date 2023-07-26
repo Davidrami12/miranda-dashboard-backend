@@ -6,8 +6,7 @@ import { deleteBookingService, getBookingService, getBookingsService, postBookin
 export const getBookings = async (req: express.Request, res: express.Response) => {
   try {
     const response = await getBookingsService(req, res);
-    res.status(200).json(response);
-    
+    res.status(200).json(JSON.parse(response));
   } catch (error: any) {
     res.status(400).json({ error: error.message });
   }

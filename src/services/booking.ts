@@ -9,30 +9,46 @@ const readBookings = fs.readFileSync(directory, "utf8");
 const bookingsJson = JSON.parse(readBookings);
 
 export const getBookingsService = async (req: express.Request, res: express.Response) => {
-  res.send(readBookings);
+  return readBookings;
 };
 
 export const getBookingService = async (req: express.Request, res: express.Response) => {
   const { id } = req.params;
-  const booking = bookingsJson.find((booking: BookingInterface) => booking.id === id);
-  res.send(JSON.stringify(booking));
+  const bookingId = bookingsJson.find((booking: BookingInterface) => booking.id == id);
+  /* console.log('ID:', id);
+  console.log('Bookings:', bookingsJson); */
+  
+  if (!bookingId) {
+    res.status(404).json({ message: "Booking not found" });
+    return;
+  }
+  
+  res.send(JSON.stringify(bookingId));
 };
 
+
 export const postBookingService = async (req: express.Request, res: express.Response) => {
-  const newBooking: BookingInterface = { ...req.body, id: uuid() };
+  /* const newBooking: BookingInterface = { ...req.body, id: uuid() };
   bookingsJson.push(newBooking);
   fs.writeFileSync(directory, JSON.stringify(bookingsJson));
   const newReadBookings = fs.readFileSync(directory, "utf8");
-  res.send(newReadBookings);
+  res.send(newReadBookings); */
 };
 
 export const deleteBookingService = async (req: express.Request, res: express.Response) => {
   const { id } = req.params;
-  const newArray = bookingsJson.filter((booking: BookingInterface) => booking.id !== id);
-  fs.writeFileSync(directory, JSON.stringify(newArray));
-  const newReadBookings = fs.readFileSync(directory, "utf8");
-  res.send(newReadBookings);
+  const bookingIndex = bookingsJson.findIndex((booking: BookingInterface) => booking.id == id);
+
+  if (bookingIndex === -1) {
+    return res.status(404).json({ message: 'Booking not found' });
+  }
+
+  bookingsJson.splice(bookingIndex, 1);
+  fs.writeFileSync(directory, JSON.stringify(bookingsJson));
+
+  return res.status(200).json({ message: 'Booking deleted successfully' });
 };
+
 
 export const updateBookingService = async (req: express.Request, res: express.Response) => {
   const { id } = req.params;

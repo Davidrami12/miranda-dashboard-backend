@@ -15,10 +15,11 @@ app.get('/', (req, res) => {
 
 // middleware
 app.use(express.json());
-app.use('/api/login',  loginRoutes);
+app.use('/api/login', loginRoutes);
 
 // public routes
 //app.use('/api/info', infoRoute)
 
 // private routes
 app.use('/api/bookings', authenticateToken, bookingRoutes);
+// app.use('/api/rooms', authenticateToken, roomRoutes);
