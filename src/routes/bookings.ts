@@ -16,4 +16,4 @@ bookingRoutes.post('/', postBooking);
 bookingRoutes.delete('/:id', deleteBooking);
 
 //UPDATE booking
-bookingRoutes.patch('/:id', updateBooking);
+bookingRoutes.put('/:id', updateBooking);

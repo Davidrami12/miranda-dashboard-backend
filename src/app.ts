@@ -15,6 +15,7 @@ app.get('/', (req, res) => {
 
 // middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use('/api/login', loginRoutes);
 
 // public routes

@@ -9,14 +9,12 @@ const readBookings = fs.readFileSync(directory, "utf8");
 const bookingsJson = JSON.parse(readBookings);
 
 export const getBookingsService = async (req: express.Request, res: express.Response) => {
-  return readBookings;
+  return readBookings; 
 };
 
 export const getBookingService = async (req: express.Request, res: express.Response) => {
   const { id } = req.params;
   const bookingId = bookingsJson.find((booking: BookingInterface) => booking.id == id);
-  /* console.log('ID:', id);
-  console.log('Bookings:', bookingsJson); */
   
   if (!bookingId) {
     res.status(404).json({ message: "Booking not found" });
@@ -28,40 +26,45 @@ export const getBookingService = async (req: express.Request, res: express.Respo
 
 
 export const postBookingService = async (req: express.Request, res: express.Response) => {
-  /* const newBooking: BookingInterface = { ...req.body, id: uuid() };
+  const newBooking: BookingInterface = { ...req.body, id: uuid() };
+
   bookingsJson.push(newBooking);
+
   fs.writeFileSync(directory, JSON.stringify(bookingsJson));
-  const newReadBookings = fs.readFileSync(directory, "utf8");
-  res.send(newReadBookings); */
+
+  res.status(201).json({ message: 'Booking successfully created!', booking: newBooking });
 };
+
 
 export const deleteBookingService = async (req: express.Request, res: express.Response) => {
   const { id } = req.params;
-  const bookingIndex = bookingsJson.findIndex((booking: BookingInterface) => booking.id == id);
+  const index = bookingsJson.findIndex((booking: BookingInterface) => booking.id == id);
 
-  if (bookingIndex === -1) {
-    return res.status(404).json({ message: 'Booking not found' });
+  if (index === -1) {
+    res.status(404).json({ message: "Booking not found" });
+    return;
   }
-
-  bookingsJson.splice(bookingIndex, 1);
+  
+  bookingsJson.splice(index, 1);
   fs.writeFileSync(directory, JSON.stringify(bookingsJson));
-
-  return res.status(200).json({ message: 'Booking deleted successfully' });
+  
+  res.send({ message: "Booking successfully deleted" });
 };
+
 
 
 export const updateBookingService = async (req: express.Request, res: express.Response) => {
   const { id } = req.params;
-  let newArray: BookingInterface[] = [];
-  let booking: BookingInterface | undefined = bookingsJson.find((booking: BookingInterface) => booking.id === id);
-  booking = { ...booking, ...req.body };
+  const index = bookingsJson.findIndex((booking: BookingInterface) => booking.id == id);
 
-  if (booking) {
-    newArray = bookingsJson.filter((bookingFilt: BookingInterface) => bookingFilt.id !== id);
-    newArray.push(booking);
+  if (index === -1) {
+    res.status(404).json({ message: "Booking not found" });
+    return;
   }
-  
-  fs.writeFileSync(directory, JSON.stringify(newArray));
-  const newReadBookings = fs.readFileSync(directory, "utf8");
-  res.send(newReadBookings);
+
+  const updatedBooking: BookingInterface = { ...bookingsJson[index], ...req.body };
+  bookingsJson[index] = updatedBooking;
+  fs.writeFileSync(directory, JSON.stringify(bookingsJson));
+
+  res.json({ message: "Booking successfully updated", booking: updatedBooking });
 };
