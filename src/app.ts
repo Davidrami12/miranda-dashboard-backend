@@ -11,6 +11,7 @@ import { bookingRoutes } from './routes/bookings'
 import { roomRoutes } from './routes/rooms';
 import { userRoutes } from './routes/users';
 import { contactRoutes } from './routes/contact';
+import { infoController } from "./controllers/information";
 
 export const app = express();
 export const PORT = process.env.PORT || 3000;
@@ -24,6 +25,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // public routes
+app.use('/info', infoController);
 app.use('/login', loginRoutes);
 
 // private routes
