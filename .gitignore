@@ -12,6 +12,9 @@
 /build
 /dist
 
+# serverless
+/.serverless
+
 # misc
 .DS_Store
 .env
