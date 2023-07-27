@@ -35,5 +35,14 @@ describe('Private routes', () => {
     expect(res.statusCode).toEqual(403);
     expect(res.body).toHaveProperty('auth', false);
   });
+
+
+  it('Fails to access private route without token returning status 401', async () => {
+    const res = await request(app)
+      .get('/bookings');
+  
+    expect(res.statusCode).toEqual(401);
+    expect(res.body).toHaveProperty('auth', false);
+  });  
   
 });
