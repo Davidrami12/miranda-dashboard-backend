@@ -14,6 +14,7 @@ describe('POST /login test', () => {
     expect(res.body).toHaveProperty('auth', true);
   });
 
+  
   it('Login fails with incorrect credentials returning status 401', async () => {
     const res = await request(app)
       .post('/login')
@@ -25,6 +26,7 @@ describe('POST /login test', () => {
     expect(res.statusCode).toEqual(401);
     expect(res.body).toEqual({ error: "User credentials doesn't match" });
   });
+
 
   it('Login fails with empty credentials returning error', async () => {
     const res = await request(app)

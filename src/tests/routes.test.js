@@ -17,6 +17,7 @@ describe('Private routes', () => {
     token = res.body.token;
   });
 
+
   it('Authorize access to private route with correct token returning status 200', async () => {
     const res = await request(app)
       .get('/bookings')
@@ -24,6 +25,7 @@ describe('Private routes', () => {
 
     expect(res.statusCode).toEqual(200);
   });
+
 
   it('Authorize fails to private route with incorrect token returning status 403', async () => {
     const res = await request(app)
@@ -33,4 +35,5 @@ describe('Private routes', () => {
     expect(res.statusCode).toEqual(403);
     expect(res.body).toHaveProperty('auth', false);
   });
+  
 });
