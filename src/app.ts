@@ -1,4 +1,5 @@
 import express from "express";
+import serverless from 'serverless-http';
 import dotenv from 'dotenv'
 dotenv.config()
 
@@ -14,22 +15,24 @@ import { contactRoutes } from './routes/contact';
 import { infoController } from "./controllers/information";
 
 export const app = express();
-export const PORT = process.env.PORT || 3000;
 
-app.get('/', (req, res) => {
-    res.send('API running on root path');
-});
 
-// middleware
+
+// Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// public routes
+// Public routes
+app.get('/', (req, res) => {
+    res.send('API running on root path');
+});
 app.use('/info', infoController);
 app.use('/login', loginRoutes);
 
-// private routes
+// Private routes with authenticate token
 app.use('/bookings', authenticateToken, bookingRoutes);
 app.use('/rooms', authenticateToken, roomRoutes);
 app.use('/users', authenticateToken, userRoutes);
 app.use('/contacts', authenticateToken, contactRoutes);
+
+export const handler = serverless(app);
