@@ -1,7 +1,5 @@
 const request = require('supertest');
-const {
-  app
-} = require('../app');
+const { app } = require('../app');
 
 describe('POST /login test', () => {
   it('Login successful returning status 200', async () => {
