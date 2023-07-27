@@ -3,7 +3,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 // Import auth middleware for private routes
-import { authenticateToken } from './middleware/login';
+import { authenticateToken } from './middleware/auth';
 
 // Import routes
 import { loginRoutes } from './controllers/login';

@@ -22,7 +22,7 @@ export const getRoomService = async (req: express.Request, res: express.Response
     return;
   }
   
-  res.send(JSON.stringify(roomId));
+  res.send(roomId);
 };
 
 

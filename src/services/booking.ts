@@ -25,7 +25,7 @@ export const getBookingService = async (req: express.Request, res: express.Respo
     return;
   }
   
-  res.send(JSON.stringify(bookingId));
+  res.send(bookingId);
 };
 
 

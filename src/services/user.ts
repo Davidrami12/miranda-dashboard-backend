@@ -23,7 +23,7 @@ export const getUserService = async (req: express.Request, res: express.Response
     return;
   }
   
-  res.send(JSON.stringify(userId));
+  res.send(userId);
 };
 
 

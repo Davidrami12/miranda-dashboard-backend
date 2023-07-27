@@ -23,5 +23,5 @@ export const getContactService = async (req: express.Request, res: express.Respo
     return;
   }
   
-  res.send(JSON.stringify(contactId));
+  res.send(contactId);
 };
