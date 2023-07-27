@@ -10,12 +10,14 @@ export const loginService = async (req: express.Request, res: express.Response) 
 
   const { email, password } = req.body;
 
-  if (user.email !== email || user.password !== password) {
-    throw new Error("User doesn't exist");
-
-  } else {
-    
-    const token = jwt.sign({ ...user, id: uuid() }, process.env.TOKEN_SECRET as string);
-    return { auth: true, token };
+  if (!email || !password) {
+    throw new Error("Missing user credentials");
   }
+
+  if (user.email !== email || user.password !== password) {
+    throw new Error("User credentials doesn't match");
+  }
+
+  const token = jwt.sign({ ...user, id: uuid() }, process.env.TOKEN_SECRET as string);
+  return { auth: true, token };
 };
