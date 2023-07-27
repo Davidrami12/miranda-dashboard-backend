@@ -1,17 +1,19 @@
 import fs from "fs";
 import path from "path";
 import express from "express";
-import { BookingInterface } from "../models/booking";
 import uuid from "react-uuid";
-import bookings from "../data/bookings.json";
+
+import { BookingInterface } from "../models/booking";
+//import bookings from "../data/bookings.json";
+
 const directory = path.join(__dirname, "..", "data", "bookings.json");
 const readBookings = fs.readFileSync(directory, "utf8");
 const bookingsJson = JSON.parse(readBookings);
 
 export const getBookingsService = async (req: express.Request, res: express.Response) => {
-  // const response = bookings;
-  // res.status(200).json(response);
-  return readBookings; 
+  //res.send(readBookings);
+  return readBookings;
+  //res.status(200).json(bookings);
 };
 
 export const getBookingService = async (req: express.Request, res: express.Response) => {
