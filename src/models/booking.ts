@@ -3,9 +3,9 @@ export interface BookingInterface {
   bookingID: number,
   userName: string,
   userPicture: string,
-  orderDate: string,
-  checkIn: string,
-  checkOut: string,
+  orderDate: Date | string,
+  checkIn: Date | string,
+  checkOut: Date | string,
   specialRequest: string,
   roomType: string,
   status: string

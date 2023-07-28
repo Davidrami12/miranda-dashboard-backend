@@ -1,5 +1,5 @@
 import express from "express";
-import { UserInterface } from "../models/user";
+import { UserInterface } from "../models/User";
 import { deleteUserService, getUserService, getUsersService, postUserService, updateUserService } from "../services/user";
 
 //GET all users

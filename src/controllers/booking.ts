@@ -1,5 +1,5 @@
 import express from "express";
-import { BookingInterface } from "../models/booking";
+import { BookingInterface } from "../models/Booking";
 import { deleteBookingService, getBookingService, getBookingsService, postBookingService, updateBookingService } from "../services/booking";
 
 //GET all bookings

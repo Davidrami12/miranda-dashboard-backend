@@ -3,7 +3,7 @@ import path from "path";
 import express from "express";
 import uuid from "react-uuid";
 
-import { BookingInterface } from "../models/booking";
+import { BookingInterface } from "../models/Booking";
 //import bookings from "../data/bookings.json";
 
 const directory = path.join(__dirname, "..", "data", "bookings.json");

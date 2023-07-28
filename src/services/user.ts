@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import express from "express";
-import { UserInterface } from "../models/user";
+import { UserInterface } from "../models/User";
 import uuid from "react-uuid";
 import users from "../data/users.json";
 const directory = path.join(__dirname, "..", "data", "users.json");

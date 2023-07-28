@@ -5,7 +5,7 @@ export interface UserInterface {
   position: string;
   email: string;
   phone: number;
-  date: string;
+  date: Date | string;
   description: string;
   state: string;
   pass: string;

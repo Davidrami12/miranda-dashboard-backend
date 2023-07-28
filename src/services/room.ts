@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import express from "express";
-import { RoomInterface } from "../models/room";
+import { RoomInterface } from "../models/Room";
 import uuid from "react-uuid";
 import rooms from "../data/rooms.json";
 const directory = path.join(__dirname, "..", "data", "rooms.json");

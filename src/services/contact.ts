@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import express from "express";
-import { ContactInterface } from "../models/contact";
+import { ContactInterface } from "../models/Contact";
 import uuid from "react-uuid";
 import contacts from "../data/contacts.json";
 const directory = path.join(__dirname, "..", "data", "contacts.json");

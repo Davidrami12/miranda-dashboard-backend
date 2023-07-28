@@ -1,5 +1,5 @@
 import express from "express";
-import { ContactInterface } from "../models/contact";
+import { ContactInterface } from "../models/Contact";
 import { getContactService, getContactsService } from "../services/contact";
 
 //GET all contacts

@@ -1,5 +1,5 @@
 import express from "express";
-import { RoomInterface } from "../models/room";
+import { RoomInterface } from "../models/Room";
 import { deleteRoomService, getRoomService, getRoomsService, postRoomService, updateRoomService } from "../services/room";
 
 //GET all rooms

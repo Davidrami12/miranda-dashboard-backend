@@ -1,7 +1,12 @@
 export interface ContactInterface{
   id: string,
   date: string,
-  customer: string,
-  comment: string,
-  button: string
+  user: {
+    name: string;
+    email: string;
+    phone: number;
+  }
+  message: string;
+  stars: number;
+  archived: boolean;
 }
