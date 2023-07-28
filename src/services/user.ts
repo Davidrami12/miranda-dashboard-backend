@@ -3,14 +3,12 @@ import path from "path";
 import express from "express";
 import { UserInterface } from "../models/User";
 import uuid from "react-uuid";
-import users from "../data/users.json";
+
 const directory = path.join(__dirname, "..", "data", "users.json");
 const readUsers = fs.readFileSync(directory, "utf8");
 const usersJson = JSON.parse(readUsers);
 
 export const getUsersService = async (req: express.Request, res: express.Response) => {
-  // const response = users;
-  // res.status(200).json(response);
   return readUsers; 
 };
 

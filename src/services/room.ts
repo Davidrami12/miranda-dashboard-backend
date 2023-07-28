@@ -3,13 +3,12 @@ import path from "path";
 import express from "express";
 import { RoomInterface } from "../models/Room";
 import uuid from "react-uuid";
-import rooms from "../data/rooms.json";
+
 const directory = path.join(__dirname, "..", "data", "rooms.json");
 const readRooms = fs.readFileSync(directory, "utf8");
 const roomsJson = JSON.parse(readRooms);
 
 export const getRoomsService = async (req: express.Request, res: express.Response) => {
-  //res.json(rooms);
   return readRooms; 
 };
 
