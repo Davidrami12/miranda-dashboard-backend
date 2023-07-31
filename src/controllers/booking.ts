@@ -1,58 +1,72 @@
 import express from "express";
 import { BookingInterface } from "../models/Booking";
 import { deleteBookingService, getBookingService, getBookingsService, postBookingService, updateBookingService } from "../services/booking";
+import { Booking } from "../schemas/bookingSchema"
 
 //GET all bookings
 export const getBookings = async (req: express.Request, res: express.Response) => {
   try {
-    const response = await getBookingsService(req, res);
-    res.status(200).json(JSON.parse(response));
-    
+    const bookings = await Booking.find({});
+    res.status(200).json(bookings);
+
   } catch (error: any) {
-    res.status(400).json({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 
 //GET booking by id
 export const getBooking = async (req: express.Request, res: express.Response) => {
   try {
-    const response = await getBookingService(req, res);
-    res.status(200).json(response);
+    const { id } = req.params;
+    const booking = await Booking.findById(id);
+    if (!booking){
+      return res.status(404).json({ message: 'Booking not found' });
+    }
+    res.status(200).json(booking);
 
   } catch (error: any) {
-    res.status(400).json({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 
 //POST new Booking
-export const postBooking = async (req: express.Request<{},{},BookingInterface> , res: express.Response) => {
+export const postBooking = async (req: express.Request, res: express.Response) => {
   try {
-    const response = await postBookingService(req, res);
-    res.status(200).json(response);
+    const booking = new Booking(req.body);
+    await booking.save();
+    res.status(200).json(booking);
 
   } catch (error: any) {
-    res.status(400).json({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 
 //DELETE booking
-export const deleteBooking = async (req: express.Request<{id: string}>, res: express.Response) => {
+export const deleteBooking = async (req: express.Request, res: express.Response) => {
   try {
-    const response = await deleteBookingService(req, res);
-    res.status(200).json(response);
+    const { id } = req.params;
+    const deleted = await Booking.findByIdAndDelete(id);
+    if (!deleted){
+      return res.status(404).json({ message: 'Booking not found' });
+    } 
+    res.status(200).json({ message: 'Booking deleted' });
 
   } catch (error: any) {
-    res.status(400).json({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 
 //UPDATE booking
 export const updateBooking = async (req: express.Request, res: express.Response) => {
   try {
-    const response = await updateBookingService(req, res);
-    res.status(200).json(response);
-
+    const { id } = req.params;
+    const booking = await Booking.findByIdAndUpdate(id, req.body, { new: true });
+    if (!booking){
+      return res.status(404).json({ message: 'Booking not found' });
+    } 
+    res.status(200).json(booking);
+    
   } catch (error: any) {
-    res.status(400).json({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
