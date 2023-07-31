@@ -5,54 +5,57 @@ import { deleteRoomService, getRoomService, getRoomsService, postRoomService, up
 //GET all rooms
 export const getRooms = async (req: express.Request, res: express.Response) => {
   try {
-    const response = await getRoomsService(req, res);
-    res.status(200).json(JSON.parse(response));
+    const rooms = await getRoomsService();
+    res.status(200).json(rooms);
     
   } catch (error: any) {
-    res.status(400).json({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 
 //GET room by id
 export const getRoom = async (req: express.Request, res: express.Response) => {
   try {
-    const response = await getRoomService(req, res);
-    res.status(200).json(response);
+    const { id } = req.params;
+    const room = await getRoomService(id);
+    res.status(200).json(room);
 
   } catch (error: any) {
-    res.status(400).json({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 
 //POST new Room
 export const postRoom = async (req: express.Request<{},{},RoomInterface> , res: express.Response) => {
   try {
-    const response = await postRoomService(req, res);
-    res.status(200).json(response);
+    const room = await postRoomService(req.body);
+    res.status(201).json({ message: 'Room successfully created!', room });
 
   } catch (error: any) {
-    res.status(400).json({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 
 //DELETE room
 export const deleteRoom = async (req: express.Request<{id: string}>, res: express.Response) => {
   try {
-    const response = await deleteRoomService(req, res);
-    res.status(200).json(response);
+    const { id } = req.params;
+    const room = await deleteRoomService(id);
+    res.status(200).json({ message: "Room successfully deleted", room });
 
   } catch (error: any) {
-    res.status(400).json({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 
 //UPDATE room
 export const updateRoom = async (req: express.Request, res: express.Response) => {
   try {
-    const response = await updateRoomService(req, res);
-    res.status(200).json(response);
+    const { id } = req.params;
+    const room = await updateRoomService(id, req.body);
+    res.status(200).json({ message: "Room successfully updated", room });
 
   } catch (error: any) {
-    res.status(400).json({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 };

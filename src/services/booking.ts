@@ -21,11 +21,11 @@ export const postBookingService = async (bookingData: BookingInterface) => {
 };
 
 export const deleteBookingService = async (id: string) => {
-  const deleted = await Booking.findByIdAndDelete(id);
-  if (!deleted){
+  const booking = await Booking.findByIdAndDelete(id);
+  if (!booking){
     throw new Error('Booking not found');
   } 
-  return { message: 'Booking deleted' };
+  return booking;
 };
 
 export const updateBookingService = async (id: string, updatedData: Partial<BookingInterface>) => {
