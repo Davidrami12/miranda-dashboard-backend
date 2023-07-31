@@ -5,21 +5,22 @@ import { getContactService, getContactsService } from "../services/contact";
 //GET all contacts
 export const getContacts = async (req: express.Request, res: express.Response) => {
   try {
-    const response = await getContactsService(req, res);
-    res.status(200).json(JSON.parse(response));
+    const contacts = await getContactsService();
+    res.status(200).json(contacts);
     
   } catch (error: any) {
-    res.status(400).json({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 
 //GET contact by id
 export const getContact = async (req: express.Request, res: express.Response) => {
   try {
-    const response = await getContactService(req, res);
-    res.status(200).json(response);
+    const { id } = req.params;
+    const contact = await getContactService(id);
+    res.status(200).json(contact);
 
   } catch (error: any) {
-    res.status(400).json({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
