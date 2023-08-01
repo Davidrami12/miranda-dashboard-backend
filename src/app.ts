@@ -3,6 +3,8 @@ import serverless from 'serverless-http';
 import dotenv from 'dotenv'
 dotenv.config()
 
+import { connection } from "./connection"
+
 // Import auth middleware for private routes
 import { authenticateToken } from './middleware/auth';
 
@@ -16,7 +18,8 @@ import { infoController } from "./controllers/information";
 
 export const app = express();
 
-
+// Connect to database
+connection()
 
 // Middlewares
 app.use(express.json());

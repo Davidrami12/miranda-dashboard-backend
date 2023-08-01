@@ -1,12 +1,13 @@
 import mongoose from 'mongoose';
 const { Schema } = mongoose;
+import { RoomInterface } from '../models/Room';
 
-const roomSchema = new Schema({
-  id: {
+const roomSchema = new Schema<RoomInterface>({
+  /* _id: {
     type: String,
     required: true,
     unique: true
-  },
+  }, */
   room_number: {
     type: Number,
     required: true,
