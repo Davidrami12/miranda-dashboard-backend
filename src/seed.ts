@@ -6,16 +6,15 @@ import { User } from './schemas/userSchema';
 import { Contact } from './schemas/contactSchema';
 
 export const generateBooking = async () => {
-  // Promise all
   for (let i = 0; i < 10; i++) {
     const booking = new Booking({
       id: faker.string.uuid(),
       bookingID: faker.string.uuid(),
       userName: faker.person.fullName(),
       userPicture: faker.image.url(),
-      orderDate: faker.date.anytime(),
-      checkIn: faker.date.anytime(),
-      checkOut:faker.date.anytime(),
+      orderDate: faker.date.anytime().toISOString(),
+      checkIn: faker.date.anytime().toISOString(),
+      checkOut:faker.date.anytime().toISOString(),
       specialRequest: faker.lorem.lines(1),
       roomType: faker.helpers.arrayElement(['Single Bed', 'Double Superior', 'Suite']),
       status: faker.helpers.arrayElement(['Check In', 'Check Out', 'In Progress'])
@@ -26,7 +25,6 @@ export const generateBooking = async () => {
 
 
 export const generateRooms = async () => {
-  // Promise all
   for (let i = 0; i < 10; i++) {
     const room = new Room({
       id: faker.string.uuid(),
@@ -51,7 +49,6 @@ export const generateRooms = async () => {
 
 
 export const generateUsers = async () => {
-  // Promise all
   for (let i = 0; i < 10; i++) {
     const user = new User({
       id: faker.string.uuid(),
@@ -60,7 +57,7 @@ export const generateUsers = async () => {
       position: faker.person.jobTitle(),
       email: faker.internet.email(),
       phone: faker.phone.number(),
-      date: faker.date.anytime(),
+      date: faker.date.anytime().toISOString(),
       description: faker.person.jobDescriptor(),
       state: faker.helpers.arrayElement(['ACTIVE', 'INACTIVE']),
       pass: faker.internet.password()
@@ -70,10 +67,12 @@ export const generateUsers = async () => {
 };
 
 export const generateContact = async () => {
-  // Promise all
   for (let i = 0; i < 10; i++) {
     const contact = new Contact({
-      
+      date: faker.date.anytime().toISOString(),
+      customer: faker.person.fullName(),
+      comment: faker.lorem.lines(1),
+      button: faker.helpers.arrayElement(['publish', 'archive'])
     });
     await contact.save();
   }
