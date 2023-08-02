@@ -5,9 +5,11 @@ import { Room } from './schemas/roomSchema';
 import { User } from './schemas/userSchema';
 import { Contact } from './schemas/contactSchema';
 
+
 const generateBooking = async () => {
+  const bookings = []
   for (let i = 0; i < 10; i++) {
-    const booking = new Booking({
+    const booking = {
       bookingID: faker.number.int(),
       userName: faker.person.fullName(),
       userPicture: faker.image.url(),
@@ -17,15 +19,17 @@ const generateBooking = async () => {
       specialRequest: faker.lorem.lines(1),
       roomType: faker.helpers.arrayElement(['Single Bed', 'Double Superior', 'Suite']),
       status: faker.helpers.arrayElement(['Check In', 'Check Out', 'In Progress'])
-    });
-    await booking.save();
+    };
+    bookings.push(booking);
   }
+  await Booking.insertMany(bookings);
 };
 
 
 const generateRooms = async () => {
+  const rooms = [];
   for (let i = 0; i < 10; i++) {
-    const room = new Room({
+    const room = {
       room_number: faker.number.int(),
       photo: faker.image.url(),
       photoTwo: faker.image.url(),
@@ -40,15 +44,17 @@ const generateRooms = async () => {
       room_rate: faker.number.int({ min: 1, max: 99 }),
       room_offer: faker.datatype.boolean(),
       room_status: faker.helpers.arrayElement(['Available', 'Booked']),
-    });
-    await room.save();
+    };
+    rooms.push(room);
   }
+  await Room.insertMany(rooms);
 };
 
 
 const generateUsers = async () => {
+  const users = [];
   for (let i = 0; i < 10; i++) {
-    const user = new User({
+    const user = {
       photo: faker.image.url(),
       name: faker.person.fullName(),
       position: faker.person.jobTitle(),
@@ -58,22 +64,28 @@ const generateUsers = async () => {
       description: faker.person.jobDescriptor(),
       state: faker.helpers.arrayElement(['ACTIVE', 'INACTIVE']),
       pass: faker.internet.password()
-    });
-    await user.save();
+    };
+    users.push(user);
   }
+  await User.insertMany(users);
 };
 
+
 const generateContact = async () => {
+  const contacts = [];
   for (let i = 0; i < 10; i++) {
-    const contact = new Contact({
+    const contact = {
       date: faker.date.anytime().toISOString(),
       customer: faker.person.fullName(),
       comment: faker.lorem.lines(1),
       button: faker.helpers.arrayElement(['publish', 'archive'])
-    });
-    await contact.save();
+    };
+    contacts.push(contact);
   }
+  await Contact.insertMany(contacts);
 };
+
+
 
 export const generateFakerData = async () => {
   await Promise.all([

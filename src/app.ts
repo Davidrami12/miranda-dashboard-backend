@@ -3,7 +3,9 @@ import serverless from 'serverless-http';
 import dotenv from 'dotenv'
 dotenv.config()
 
+// Import db connection and data generator
 import { connection } from "./connection"
+import { seedDatabase } from "./seedDatabase";
 
 // Import auth middleware for private routes
 import { authenticateToken } from './middleware/auth';
@@ -19,7 +21,7 @@ import { infoController } from "./controllers/information";
 export const app = express();
 
 // Connect to database
-connection()
+connection().then(seedDatabase).catch(console.error);
 
 // Middlewares
 app.use(express.json());

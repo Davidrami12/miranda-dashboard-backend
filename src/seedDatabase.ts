@@ -1,12 +1,10 @@
-import { connection } from './connection';
 import { generateFakerData } from './seed';
 import { Booking } from './schemas/bookingSchema';
 import { Room } from './schemas/roomSchema';
 import { User } from './schemas/userSchema';
 import { Contact } from './schemas/contactSchema';
 
-const seedDatabase = async () => {
-  await connection();
+export const seedDatabase = async () => {
 
   // Clean the database
   await Promise.all([
@@ -21,8 +19,3 @@ const seedDatabase = async () => {
 
   console.log("Database seeded successfully!");
 };
-
-seedDatabase().catch((error) => {
-  console.error("Error while seeding the database: ", error);
-  process.exit(1);
-});
