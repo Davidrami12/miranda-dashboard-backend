@@ -5,11 +5,10 @@ import { Room } from './schemas/roomSchema';
 import { User } from './schemas/userSchema';
 import { Contact } from './schemas/contactSchema';
 
-export const generateBooking = async () => {
+const generateBooking = async () => {
   for (let i = 0; i < 10; i++) {
     const booking = new Booking({
-      id: faker.string.uuid(),
-      bookingID: faker.string.uuid(),
+      bookingID: faker.number.int(),
       userName: faker.person.fullName(),
       userPicture: faker.image.url(),
       orderDate: faker.date.anytime().toISOString(),
@@ -24,10 +23,9 @@ export const generateBooking = async () => {
 };
 
 
-export const generateRooms = async () => {
+const generateRooms = async () => {
   for (let i = 0; i < 10; i++) {
     const room = new Room({
-      id: faker.string.uuid(),
       room_number: faker.number.int(),
       photo: faker.image.url(),
       photoTwo: faker.image.url(),
@@ -48,15 +46,14 @@ export const generateRooms = async () => {
 };
 
 
-export const generateUsers = async () => {
+const generateUsers = async () => {
   for (let i = 0; i < 10; i++) {
     const user = new User({
-      id: faker.string.uuid(),
       photo: faker.image.url(),
       name: faker.person.fullName(),
       position: faker.person.jobTitle(),
       email: faker.internet.email(),
-      phone: faker.phone.number(),
+      phone: faker.number.int({ min: 100000000, max: 999999999 }),
       date: faker.date.anytime().toISOString(),
       description: faker.person.jobDescriptor(),
       state: faker.helpers.arrayElement(['ACTIVE', 'INACTIVE']),
@@ -66,7 +63,7 @@ export const generateUsers = async () => {
   }
 };
 
-export const generateContact = async () => {
+const generateContact = async () => {
   for (let i = 0; i < 10; i++) {
     const contact = new Contact({
       date: faker.date.anytime().toISOString(),
@@ -76,4 +73,13 @@ export const generateContact = async () => {
     });
     await contact.save();
   }
+};
+
+export const generateFakerData = async () => {
+  await Promise.all([
+    generateBooking(),
+    generateRooms(),
+    generateUsers(),
+    generateContact(),
+  ]);
 };
