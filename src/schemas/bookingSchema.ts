@@ -1,12 +1,8 @@
 import mongoose from 'mongoose';
 const { Schema } = mongoose;
+import { BookingInterface } from '../models/Booking';
 
-const bookingSchema = new Schema({
-  id: {
-    type: String,
-    required: true,
-    unique: true
-  },
+const bookingSchema = new Schema<BookingInterface>({
   bookingID: { 
     type: Number, 
     required: true, 

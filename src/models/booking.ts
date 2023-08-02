@@ -1,5 +1,4 @@
 export interface BookingInterface {
-  id?: string,
   bookingID: number,
   userName: string,
   userPicture: string,

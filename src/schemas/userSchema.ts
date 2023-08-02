@@ -1,12 +1,8 @@
 import mongoose from 'mongoose';
 const { Schema } = mongoose;
+import { UserInterface } from '../models/User';
 
-const userSchema = new Schema({
-  id: {
-    type: String,
-    required: true,
-    unique: true
-  },
+const userSchema = new Schema<UserInterface>({
   photo: {
     type: String,
     required: true

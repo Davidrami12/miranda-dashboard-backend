@@ -1,12 +1,8 @@
 import mongoose from 'mongoose';
 const { Schema } = mongoose;
+import { ContactInterface } from '../models/Contact';
 
-const contactSchema = new Schema({
-  id: {
-    type: String,
-    required: true,
-    unique: true
-  },
+const contactSchema = new Schema<ContactInterface>({
   date: {
     type: String,
     required: true

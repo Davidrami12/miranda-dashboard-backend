@@ -5,6 +5,26 @@ import { Room } from './schemas/roomSchema';
 import { User } from './schemas/userSchema';
 import { Contact } from './schemas/contactSchema';
 
+export const generateBooking = async () => {
+  // Promise all
+  for (let i = 0; i < 10; i++) {
+    const booking = new Booking({
+      id: faker.string.uuid(),
+      bookingID: faker.string.uuid(),
+      userName: faker.person.fullName(),
+      userPicture: faker.image.url(),
+      orderDate: faker.date.anytime(),
+      checkIn: faker.date.anytime(),
+      checkOut:faker.date.anytime(),
+      specialRequest: faker.lorem.lines(1),
+      roomType: faker.helpers.arrayElement(['Single Bed', 'Double Superior', 'Suite']),
+      status: faker.helpers.arrayElement(['Check In', 'Check Out', 'In Progress'])
+    });
+    await booking.save();
+  }
+};
+
+
 export const generateRooms = async () => {
   // Promise all
   for (let i = 0; i < 10; i++) {
@@ -31,19 +51,30 @@ export const generateRooms = async () => {
 
 
 export const generateUsers = async () => {
+  // Promise all
   for (let i = 0; i < 10; i++) {
     const user = new User({
       id: faker.string.uuid(),
       photo: faker.image.url(),
-      name: faker.name.fullName(),
-      position: 
-      email: 
-      phone: 
-      date: 
-      description: 
-      state: 
-      pass: 
+      name: faker.person.fullName(),
+      position: faker.person.jobTitle(),
+      email: faker.internet.email(),
+      phone: faker.phone.number(),
+      date: faker.date.anytime(),
+      description: faker.person.jobDescriptor(),
+      state: faker.helpers.arrayElement(['ACTIVE', 'INACTIVE']),
+      pass: faker.internet.password()
     });
     await user.save();
+  }
+};
+
+export const generateContact = async () => {
+  // Promise all
+  for (let i = 0; i < 10; i++) {
+    const contact = new Contact({
+      
+    });
+    await contact.save();
   }
 };
