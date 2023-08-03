@@ -10,7 +10,7 @@ import { Contact } from './schemas/contactSchema';
 
 
 
-const getRandomSubarray = (arr: string[]) => {
+const generateRandomFacilities = (arr: string[]) => {
   let shuffled = arr.slice(0), i = arr.length, min = Math.floor(Math.random() * i), temp, index;
   while (i--) {
     index = Math.floor((i + 1) * Math.random());
@@ -21,8 +21,15 @@ const getRandomSubarray = (arr: string[]) => {
   return shuffled.slice(min);
 }
 
-let date = faker.date.future();
-let formattedDate = moment(date).format('DD/MM/YYYY');
+const generateRandomDate = (startDate: string, endDate: string) => {
+  const startTimestamp = moment(startDate, 'DD/MM/YYYY').valueOf();
+  const endTimestamp = moment(endDate, 'DD/MM/YYYY').valueOf();
+
+  const randomTimestamp = faker.date.between({ from: startTimestamp, to: endTimestamp });
+  const randomDate = moment(randomTimestamp);
+
+  return randomDate.format('DD/MM/YYYY');
+}
 
 
 
@@ -34,9 +41,9 @@ const generateBooking = async () => {
       bookingID: faker.number.int(),
       userName: faker.person.fullName(),
       userPicture: faker.image.url(),
-      orderDate: faker.date.anytime().toISOString(),
-      checkIn: faker.date.anytime().toISOString(),
-      checkOut:faker.date.anytime().toISOString(),
+      orderDate: generateRandomDate('01/01/2022', '31/12/2022'),
+      checkIn: generateRandomDate('01/01/2022', '31/12/2022'),
+      checkOut: generateRandomDate('01/01/2023', '31/12/2023'),
       specialRequest: faker.lorem.lines(1),
       roomType: faker.helpers.arrayElement(['Single Bed', 'Double Superior', 'Suite']),
       status: faker.helpers.arrayElement(['Check In', 'Check Out', 'In Progress'])
@@ -45,16 +52,6 @@ const generateBooking = async () => {
   }
   await Booking.insertMany(bookings);
 };
-
-
-
-/* function randomDate(start, end) {
-  return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-}
-
-let randomDateBetween1950And2001 = randomDate(new Date('1950/01/01'), new Date('2001/12/31'));
-
-let formattedDate = moment(randomDateBetween1950And2001).format("DD/MM/YYYY"); */
 
 const generateRooms = async () => {
   const rooms = [];
@@ -71,7 +68,7 @@ const generateRooms = async () => {
       discount: faker.datatype.boolean(),
       cancellationPolicy: faker.lorem.paragraph(),
       bed_type: faker.helpers.arrayElement(['Single', 'Double', 'Suite']),
-      room_facilities: getRandomSubarray(facilities).join(', '),
+      room_facilities: generateRandomFacilities(facilities).join(', '),
       room_rate: faker.number.int({ min: 1, max: 99 }),
       room_offer: faker.datatype.boolean(),
       room_status: faker.helpers.arrayElement(['Available', 'Booked']),
@@ -80,16 +77,6 @@ const generateRooms = async () => {
   }
   await Room.insertMany(rooms);
 };
-
-const generateRandomDate = (startDate: string, endDate: string) => {
-  const startTimestamp = moment(startDate, 'DD/MM/YYYY').valueOf();
-  const endTimestamp = moment(endDate, 'DD/MM/YYYY').valueOf();
-  
-  const randomTimestamp = faker.date.between({ from: startTimestamp, to: endTimestamp });
-  const randomDate = moment(randomTimestamp);
-
-  return randomDate.format('DD/MM/YYYY');
-}
 
 const generateUsers = async () => {
   const users = [];
@@ -109,14 +96,12 @@ const generateUsers = async () => {
   }
   await User.insertMany(users);
 };
-// date: faker.date.between('01/12/2022', '12/12/2023').toLocaleDateString(),
-// date: faker.date.betweens({from: '01/01/2022', to: '29/12/2023'}).toLocaleDateString(),
 
 const generateContact = async () => {
   const contacts = [];
   for (let i = 0; i < 10; i++) {
     const contact = {
-      date: faker.date.anytime().toISOString(),
+      date: generateRandomDate('01/01/2022', '31/12/2023'),
       customer: faker.person.fullName(),
       comment: faker.lorem.lines(1),
       button: faker.helpers.arrayElement(['publish', 'archive'])
