@@ -1,11 +1,29 @@
 import mongoose from 'mongoose';
 import { faker } from '@faker-js/faker';
+import moment from 'moment';
 
 // Import mongoose schemas
 import { Booking } from './schemas/bookingSchema';
 import { Room } from './schemas/roomSchema';
 import { User } from './schemas/userSchema';
 import { Contact } from './schemas/contactSchema';
+
+
+
+const getRandomSubarray = (arr: string[]) => {
+  let shuffled = arr.slice(0), i = arr.length, min = Math.floor(Math.random() * i), temp, index;
+  while (i--) {
+    index = Math.floor((i + 1) * Math.random());
+    temp = shuffled[index];
+    shuffled[index] = shuffled[i];
+    shuffled[i] = temp;
+  }
+  return shuffled.slice(min);
+}
+
+let date = faker.date.future();
+let formattedDate = moment(date).format('DD/MM/YYYY');
+
 
 
 // Functions to generate random data 
@@ -28,16 +46,15 @@ const generateBooking = async () => {
   await Booking.insertMany(bookings);
 };
 
-function getRandomSubarray(arr: string[]): string[] {
-  let shuffled = arr.slice(0), i = arr.length, min = Math.floor(Math.random() * i), temp, index;
-  while (i--) {
-    index = Math.floor((i + 1) * Math.random());
-    temp = shuffled[index];
-    shuffled[index] = shuffled[i];
-    shuffled[i] = temp;
-  }
-  return shuffled.slice(min);
+
+
+/* function randomDate(start, end) {
+  return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 }
+
+let randomDateBetween1950And2001 = randomDate(new Date('1950/01/01'), new Date('2001/12/31'));
+
+let formattedDate = moment(randomDateBetween1950And2001).format("DD/MM/YYYY"); */
 
 const generateRooms = async () => {
   const rooms = [];
@@ -64,6 +81,16 @@ const generateRooms = async () => {
   await Room.insertMany(rooms);
 };
 
+const generateRandomDate = (startDate: string, endDate: string) => {
+  const startTimestamp = moment(startDate, 'DD/MM/YYYY').valueOf();
+  const endTimestamp = moment(endDate, 'DD/MM/YYYY').valueOf();
+  
+  const randomTimestamp = faker.date.between({ from: startTimestamp, to: endTimestamp });
+  const randomDate = moment(randomTimestamp);
+
+  return randomDate.format('DD/MM/YYYY');
+}
+
 const generateUsers = async () => {
   const users = [];
   for (let i = 0; i < 10; i++) {
@@ -73,8 +100,7 @@ const generateUsers = async () => {
       position: faker.person.jobTitle(),
       email: faker.internet.email(),
       phone: faker.phone.number('91 ### ## ##'),
-      date: faker.date.between('01/12/2022', '12/12/2023').toLocaleDateString(),
-      // date: faker.date.betweens({from: '01/01/2022', to: '29/12/2023'}).toLocaleDateString(),
+      date: generateRandomDate('01/01/2022', '31/12/2023'),
       description: faker.person.jobDescriptor(),
       state: faker.helpers.arrayElement(['ACTIVE', 'INACTIVE']),
       pass: faker.internet.password()
@@ -83,6 +109,8 @@ const generateUsers = async () => {
   }
   await User.insertMany(users);
 };
+// date: faker.date.between('01/12/2022', '12/12/2023').toLocaleDateString(),
+// date: faker.date.betweens({from: '01/01/2022', to: '29/12/2023'}).toLocaleDateString(),
 
 const generateContact = async () => {
   const contacts = [];
