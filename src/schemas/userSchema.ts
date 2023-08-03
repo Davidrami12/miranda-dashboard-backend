@@ -21,7 +21,7 @@ const userSchema = new Schema<UserInterface>({
     unique: true
   },
   phone: {
-    type: Number,
+    type: String,
     required: true
   },
   date: {

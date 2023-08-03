@@ -20,10 +20,10 @@ import { infoController } from "./controllers/information";
 
 export const app = express();
 
-// Connect to database
+// Connect to database and generate random data
 connection().then(seedDatabase).catch(console.error);
 
-// Middlewares
+// Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
