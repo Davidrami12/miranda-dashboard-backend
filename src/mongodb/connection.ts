@@ -1,13 +1,15 @@
 import mongoose from "mongoose";
+import dotenv from 'dotenv';
+dotenv.config();
 
 export const connection = async() => {
   try{
-    const url = "mongodb://0.0.0.0:27017/miranda"
-    await mongoose.connect(url)
-    console.log("Connected to miranda database")
+    const url = String(process.env.MONGO_DB_COMPASS);
+    await mongoose.connect(url);
+    console.log("Connected to miranda database");
 
   }catch(error){
-    console.log(error)
-    throw new Error("Cannot connect to database")
+    console.log(error);
+    throw new Error("Cannot connect to database");
   }
 }
