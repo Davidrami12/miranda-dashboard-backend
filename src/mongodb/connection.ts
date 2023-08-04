@@ -4,7 +4,6 @@ export const connection = async() => {
   try{
     const url = "mongodb://0.0.0.0:27017/miranda"
     await mongoose.connect(url)
-    
     console.log("Connected to miranda database")
 
   }catch(error){

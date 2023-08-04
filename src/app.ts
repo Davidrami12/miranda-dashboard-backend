@@ -4,8 +4,8 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 // Import db connection and data generator
-import { connection } from "./connection"
-import { seedDatabase } from "./seedDatabase";
+import { connection } from "./mongodb/connection"
+import { seedDatabase } from "./mongodb/seedDatabase";
 
 // Import auth middleware for private routes
 import { authenticateToken } from './middleware/auth';
@@ -21,7 +21,6 @@ import { infoController } from "./controllers/information";
 export const app = express();
 
 // Connect to database and generate random data
-// connection().then(seedDatabase).catch(console.error);
 connection();
 
 // Middleware

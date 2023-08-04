@@ -1,5 +1,4 @@
 export interface UserInterface {
-  id: string;
   photo: string;
   name: string;
   position: string;

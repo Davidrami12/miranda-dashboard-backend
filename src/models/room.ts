@@ -1,5 +1,4 @@
 export interface RoomInterface {
-  _id: string;
   room_number: number;
   photo: string;
   photoTwo: string;

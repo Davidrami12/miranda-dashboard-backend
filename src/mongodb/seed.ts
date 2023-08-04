@@ -3,10 +3,10 @@ import { faker } from '@faker-js/faker';
 import moment from 'moment';
 
 // Import mongoose schemas
-import { Booking } from './schemas/bookingSchema';
-import { Room } from './schemas/roomSchema';
-import { User } from './schemas/userSchema';
-import { Contact } from './schemas/contactSchema';
+import { Booking } from '../schemas/bookingSchema';
+import { Room } from '../schemas/roomSchema';
+import { User } from '../schemas/userSchema';
+import { Contact } from '../schemas/contactSchema';
 
 
 

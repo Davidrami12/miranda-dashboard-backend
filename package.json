@@ -8,7 +8,7 @@
     "dev": "nodemon --watch \"src/**/*.ts\" --exec \"ts-node\" src/server.ts",
     "test": "jest",
     "build": "rimraf dist && tsc",
-    "seed": "ts-node ./src/seedDatabase.ts"
+    "seed": "ts-node ./src/mongodb/seedDatabase.ts"
   },
   "repository": {
     "type": "git",
