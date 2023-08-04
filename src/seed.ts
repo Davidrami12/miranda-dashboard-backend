@@ -120,4 +120,5 @@ export const generateFakerData = async () => {
     generateUsers(),
     generateContact(),
   ]);
+  console.log("Database seeded successfully!");
 };

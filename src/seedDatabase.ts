@@ -3,8 +3,12 @@ import { Booking } from './schemas/bookingSchema';
 import { Room } from './schemas/roomSchema';
 import { User } from './schemas/userSchema';
 import { Contact } from './schemas/contactSchema';
+import { connection } from './connection';
+import { disconnect } from 'mongoose';
 
 export const seedDatabase = async () => {
+
+  await connection();
 
   // Clean the database
   await Promise.all([
@@ -17,5 +21,7 @@ export const seedDatabase = async () => {
   // Generate new data
   await generateFakerData();
 
-  console.log("Database seeded successfully!");
+  await disconnect();
 };
+
+seedDatabase();

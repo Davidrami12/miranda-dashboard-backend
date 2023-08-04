@@ -21,7 +21,8 @@ import { infoController } from "./controllers/information";
 export const app = express();
 
 // Connect to database and generate random data
-connection().then(seedDatabase).catch(console.error);
+// connection().then(seedDatabase).catch(console.error);
+connection();
 
 // Middleware
 app.use(express.json());
