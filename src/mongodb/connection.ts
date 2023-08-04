@@ -4,9 +4,9 @@ dotenv.config();
 
 export const connection = async() => {
   try{
-    const url = String(process.env.MONGO_DB_COMPASS);
+    const url = String(process.env.MONGO_DB_ATLAS);
     await mongoose.connect(url);
-    console.log("Connected to miranda database");
+    console.log("Connected to miranda database on Atlas");
 
   }catch(error){
     console.log(error);
