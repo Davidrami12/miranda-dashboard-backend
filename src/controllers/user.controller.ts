@@ -1,6 +1,6 @@
 import express from "express";
 import { UserInterface } from "../models/User";
-import { deleteUserService, getUserService, getUsersService, postUserService, updateUserService } from "../services/user";
+import { deleteUserService, getUserService, getUsersService, postUserService, updateUserService } from "../services/user.service";
 
 //GET all users
 export const getUsers = async (req: express.Request, res: express.Response) => {

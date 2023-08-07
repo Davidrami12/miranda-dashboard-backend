@@ -1,6 +1,6 @@
 import express from "express";
 import { RoomInterface } from "../models/Room";
-import { deleteRoomService, getRoomService, getRoomsService, postRoomService, updateRoomService } from "../services/room";
+import { deleteRoomService, getRoomService, getRoomsService, postRoomService, updateRoomService } from "../services/room.service";
 
 //GET all rooms
 export const getRooms = async (req: express.Request, res: express.Response) => {

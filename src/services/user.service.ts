@@ -1,6 +1,6 @@
 import express from "express";
 import { UserInterface } from "../models/User";
-import { User } from "../schemas/userSchema";
+import { User } from "../schemas/user.schema";
 
 export const getUsersService = async () => {
   return await User.find({});

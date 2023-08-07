@@ -1,7 +1,7 @@
 import express from "express";
 import { BookingInterface } from "../models/Booking";
-import { deleteBookingService, getBookingService, getBookingsService, postBookingService, updateBookingService } from "../services/booking";
-import { Booking } from "../schemas/bookingSchema"
+import { deleteBookingService, getBookingService, getBookingsService, postBookingService, updateBookingService } from "../services/booking.service";
+import { Booking } from "../schemas/booking.schema"
 
 //GET all rooms
 export const getBookings = async (req: express.Request, res: express.Response) => {

@@ -1,6 +1,6 @@
 import express from "express";
 import { ContactInterface } from "../models/Contact";
-import { Contact } from "../schemas/contactSchema";
+import { Contact } from "../schemas/contact.schema";
 
 export const getContactsService = async () => {
   return await Contact.find({});

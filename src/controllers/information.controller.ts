@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { information } from '../services/information';
+import { information } from '../services/information.service';
 
 export const infoController = Router();
 

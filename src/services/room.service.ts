@@ -1,6 +1,6 @@
 import express from "express";
 import { RoomInterface } from "../models/Room";
-import { Room } from "../schemas/roomSchema";
+import { Room } from "../schemas/room.schema";
 
 export const getRoomsService = async () => {
   return await Room.find({});

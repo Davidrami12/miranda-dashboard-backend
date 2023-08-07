@@ -12,12 +12,12 @@ import { seedDatabase } from "./mongodb/seedDatabase";
 import { authenticateToken } from './middleware/auth';
 
 // Import routes
-import { loginRoutes } from './controllers/login';
-import { bookingRoutes } from './routes/bookings'
-import { roomRoutes } from './routes/rooms';
-import { userRoutes } from './routes/users';
-import { contactRoutes } from './routes/contact';
-import { infoController } from "./controllers/information";
+import { loginRoute } from './controllers/login.controller';
+import { bookingRoutes } from './routes/booking.routes'
+import { roomRoutes } from './routes/room.routes';
+import { userRoutes } from './routes/user.routes';
+import { contactRoutes } from './routes/contact.routes';
+import { infoController } from "./controllers/information.controller";
 
 export const app = express();
 
@@ -34,7 +34,7 @@ app.get('/', (req, res) => {
     res.send('API running on root path');
 });
 app.use('/info', infoController);
-app.use('/login', loginRoutes);
+app.use('/login', loginRoute);
 
 // Private routes with authenticate token
 app.use('/bookings', authenticateToken, bookingRoutes);

@@ -1,7 +1,7 @@
 import express from 'express';
-import { loginService } from '../services/login';
+import { loginService } from '../services/login.service';
 
-export const loginRoutes = express.Router();
+export const loginRoute = express.Router();
 
 const loginController = async (req: express.Request , res: express.Response) => {
   try {
@@ -13,4 +13,4 @@ const loginController = async (req: express.Request , res: express.Response) => 
 };
 
 
-loginRoutes.post("/", loginController)
+loginRoute.post("/", loginController)
