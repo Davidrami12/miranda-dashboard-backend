@@ -1,10 +1,11 @@
 import express from "express";
 import serverless from 'serverless-http';
-import dotenv from 'dotenv'
-dotenv.config()
+import cors from 'cors';
+import dotenv from 'dotenv';
+dotenv.config();
 
 // Import db connection and data generator
-import { connection } from "./mongodb/connection"
+import { connection } from "./mongodb/connection";
 import { seedDatabase } from "./mongodb/seedDatabase";
 
 // Import auth middleware for private routes
@@ -24,6 +25,7 @@ export const app = express();
 connection();
 
 // Middleware
+app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
