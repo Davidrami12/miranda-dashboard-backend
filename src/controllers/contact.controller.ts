@@ -1,6 +1,6 @@
 import express from "express";
 import { ContactInterface } from "../models/Contact";
-import { getContactService, getContactsService } from "../services/contact";
+import { getContactService, getContactsService } from "../services/contact.service";
 
 //GET all contacts
 export const getContacts = async (req: express.Request, res: express.Response) => {

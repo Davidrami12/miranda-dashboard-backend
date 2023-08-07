@@ -1,8 +1,8 @@
 import { generateFakerData } from './seed';
-import { Booking } from '../schemas/bookingSchema';
-import { Room } from '../schemas/roomSchema';
-import { User } from '../schemas/userSchema';
-import { Contact } from '../schemas/contactSchema';
+import { Booking } from '../schemas/booking.schema';
+import { Room } from '../schemas/room.schema';
+import { User } from '../schemas/user.schema';
+import { Contact } from '../schemas/contact.schema';
 import { connection } from './connection';
 import { disconnect } from 'mongoose';
 

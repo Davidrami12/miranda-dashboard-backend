@@ -1,6 +1,6 @@
 import express from "express";
 import { BookingInterface } from "../models/Booking";
-import { Booking } from "../schemas/bookingSchema";
+import { Booking } from "../schemas/booking.schema";
 
 export const getBookingsService = async () => {
   return await Booking.find({});
