@@ -4,7 +4,7 @@ dotenv.config();
 
 export const connection = async() => {
   try{
-    const url = String(process.env.MONGO_DB_ATLAS);
+    const url = String(process.env.MONGO_URL);
     await mongoose.connect(url);
     console.log("Connected to miranda database on Atlas");
 
