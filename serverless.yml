@@ -10,7 +10,7 @@ provider:
   name: aws
   region: eu-west-3
   environment:
-    SECRET: ${file(.env.json):TOKEN_SECRET}
+    TOKEN_SECRET: ${file(.env.json):TOKEN_SECRET}
     MONGO_URL: ${file(.env.json):MONGO_URL}
   runtime: nodejs18.x
 functions:

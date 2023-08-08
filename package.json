@@ -8,6 +8,7 @@
     "dev": "nodemon --watch \"src/**/*.ts\" --exec \"ts-node\" src/server.ts",
     "test": "jest",
     "build": "rimraf dist && tsc",
+    "deploy": "npm run build && serverless deploy --force",
     "seed": "ts-node ./src/mongodb/seedDatabase.ts"
   },
   "repository": {
