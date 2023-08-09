@@ -6,10 +6,10 @@ export const loginRoute = express.Router();
 const loginController = async (req: express.Request , res: express.Response) => {
   try {
     const response = await loginService(req, res);
-    res.status(200).json(response);
   } catch (error: any) {
-    res.status(401).json({ error: error.message });
-  }
+    console.log(error)
+    res.status(500).json({ error: error.message });
+  } 
 };
 
 

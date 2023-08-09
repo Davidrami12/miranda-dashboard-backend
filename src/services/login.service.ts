@@ -9,15 +9,17 @@ export const loginService = async (req: express.Request, res: express.Response) 
   };
 
   const { email, password } = req.body;
+  console.log(email, password)
 
-  if (!email || !password) {
-    throw new Error("Missing user credentials");
+  if ((email === "" || password === "")) {
+    res.status(400).json({ error: "Missing user credentials" });
+
+  } else if (user.email !== email || user.password !== password) {
+    res.status(401).json({ error: "User credentials don't match" });
+
+  } else{
+    const token = jwt.sign({ ...user, id: uuid() }, process.env.TOKEN_SECRET as string);
+    res.status(200).json({ auth: true, token });
   }
-
-  if (user.email !== email || user.password !== password) {
-    throw new Error("User credentials doesn't match");
-  }
-
-  const token = jwt.sign({ ...user, id: uuid() }, process.env.TOKEN_SECRET as string);
-  return { auth: true, token };
 };
+
