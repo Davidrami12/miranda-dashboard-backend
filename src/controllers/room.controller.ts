@@ -1,6 +1,7 @@
 import express from "express";
 import { RoomInterface } from "../models/Room";
 import { deleteRoomService, getRoomService, getRoomsService, postRoomService, updateRoomService } from "../services/room.service";
+import { postRoomValidator, updateRoomValidator } from '../validators/room.validator';
 
 //GET all rooms
 export const getRooms = async (req: express.Request, res: express.Response) => {
@@ -28,6 +29,7 @@ export const getRoom = async (req: express.Request, res: express.Response) => {
 //POST new Room
 export const postRoom = async (req: express.Request<{},{},RoomInterface> , res: express.Response) => {
   try {
+    // postRoomValidator.validate(req.body, {abortEarly: false});
     const room = await postRoomService(req.body);
     res.status(201).json({ message: 'Room successfully created!', room });
 
@@ -51,6 +53,7 @@ export const deleteRoom = async (req: express.Request<{id: string}>, res: expres
 //UPDATE room
 export const updateRoom = async (req: express.Request, res: express.Response) => {
   try {
+    // updateRoomValidator.validate(req.body, {abortEarly: false});
     const { id } = req.params;
     const room = await updateRoomService(id, req.body);
     res.status(200).json({ message: "Room successfully updated", room });
