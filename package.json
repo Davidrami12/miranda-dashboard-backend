@@ -41,6 +41,7 @@
   },
   "homepage": "https://github.com/Davidrami12/miranda-dashboard-backend#readme",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
@@ -54,6 +55,7 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^8.0.2",
+    "@types/bcrypt": "^5.0.0",
     "@types/cors": "^2.8.13",
     "@types/express": "^4.17.17",
     "@types/jest": "^29.5.3",
