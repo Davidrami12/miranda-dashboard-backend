@@ -1,36 +1,12 @@
 import mongoose from 'mongoose';
 import { faker } from '@faker-js/faker';
-import moment from 'moment';
+import { generateRandomDate, generateRandomFacilities } from '../utils/utils';
 
 // Import mongoose schemas
 import { Booking } from '../schemas/booking.schema';
 import { Room } from '../schemas/room.schema';
 import { User } from '../schemas/user.schema';
 import { Contact } from '../schemas/contact.schema';
-
-
-
-const generateRandomFacilities = (arr: string[]) => {
-  let shuffled = arr.slice(0), i = arr.length, min = Math.floor(Math.random() * i), temp, index;
-  while (i--) {
-    index = Math.floor((i + 1) * Math.random());
-    temp = shuffled[index];
-    shuffled[index] = shuffled[i];
-    shuffled[i] = temp;
-  }
-  return shuffled.slice(min);
-}
-
-const generateRandomDate = (startDate: string, endDate: string) => {
-  const startTimestamp = moment(startDate, 'DD/MM/YYYY').valueOf();
-  const endTimestamp = moment(endDate, 'DD/MM/YYYY').valueOf();
-
-  const randomTimestamp = faker.date.between({ from: startTimestamp, to: endTimestamp });
-  const randomDate = moment(randomTimestamp);
-
-  return randomDate.format('DD/MM/YYYY');
-}
-
 
 
 // Functions to generate random data 
