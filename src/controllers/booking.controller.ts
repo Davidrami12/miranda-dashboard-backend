@@ -1,7 +1,7 @@
 import express from "express";
 import { BookingInterface } from "../models/Booking";
 import { deleteBookingService, getBookingService, getBookingsService, postBookingService, updateBookingService } from "../services/booking.service";
-import { Booking } from "../schemas/booking.schema"
+import { postBookingValidator, updateBookingValidator } from '../validators/booking.validator';
 
 //GET all rooms
 export const getBookings = async (req: express.Request, res: express.Response) => {
@@ -29,6 +29,7 @@ export const getBooking = async (req: express.Request, res: express.Response) =>
 //POST new Booking
 export const postBooking = async (req: express.Request<{},{},BookingInterface> , res: express.Response) => {
   try {
+    // postBookingValidator.validate(req.body, {abortEarly: false});
     const room = await postBookingService(req.body);
     res.status(201).json({ message: 'Booking successfully created!', room });
 
@@ -52,6 +53,7 @@ export const deleteBooking = async (req: express.Request<{id: string}>, res: exp
 //UPDATE room
 export const updateBooking = async (req: express.Request, res: express.Response) => {
   try {
+    // updateBookingValidator.validate(req.body, {abortEarly: false});
     const { id } = req.params;
     const room = await updateBookingService(id, req.body);
     res.status(200).json({ message: "Booking successfully updated", room });
