@@ -11,10 +11,10 @@ const userSchema = new Schema<UserInterface>({
     type: String,
     required: true
   },
-  position: {
+  /* position: {
     type: String,
     required: true
-  },
+  }, */
   email: {
     type: String,
     required: true,

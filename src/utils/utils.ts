@@ -44,5 +44,5 @@ export const generateRandomDate = (startDate: string, endDate: string) => {
   const randomTimestamp = faker.date.between({ from: startTimestamp, to: endTimestamp });
   const randomDate = moment(randomTimestamp);
 
-  return randomDate.format('DD/MM/YYYY');
+  return randomDate.format('YYYY-MM-DD');
 }

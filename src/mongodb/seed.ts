@@ -34,18 +34,18 @@ const generateRooms = async () => {
   const facilities = ["AC", "Shower", "Towel", "Bathtub", "Coffee Set", "LED TV", "Wi-Fi"];
   for (let i = 0; i < 10; i++) {
     const room = {
-      room_number: faker.number.int(),
-      photo: faker.image.url(),
+      room_number: faker.number.int({min: 100, max: 900}),
+      photo: faker.image.urlLoremFlickr({ category: 'room' }),
       photoTwo: faker.image.url(),
       photoThree: faker.image.url(),
       photoFour: faker.image.url(),
       description: faker.lorem.paragraph(),
-      discountPercent: faker.number.int(),
-      discount: faker.datatype.boolean(),
+      discountPercent: faker.number.int({ min: 10, max: 90 }),
+      discount: faker.helpers.arrayElement(['Yes', 'No']),
       cancellationPolicy: faker.lorem.paragraph(),
-      bed_type: faker.helpers.arrayElement(['Single', 'Double', 'Suite']),
+      bed_type: faker.helpers.arrayElement(['Single Bed', 'Double Bed', 'Double Superior', 'Suite']),
       room_facilities: generateRandomFacilities(facilities).join(', '),
-      room_rate: faker.number.int({ min: 1, max: 99 }),
+      room_rate: faker.number.int({ min: 10, max: 200 }),
       room_offer: faker.datatype.boolean(),
       room_status: faker.helpers.arrayElement(['Available', 'Booked']),
     };
@@ -58,11 +58,11 @@ const generateUsers = async () => {
   const users = [];
   for (let i = 0; i < 10; i++) {
     const user = {
-      photo: faker.image.url(),
+      photo: faker.image.urlLoremFlickr({ category: 'cats' }),
       name: faker.person.fullName(),
       position: faker.person.jobTitle(),
       email: faker.internet.email(),
-      phone: faker.phone.number('91 ### ## ##'),
+      phone: faker.phone.number('91#######'),
       date: generateRandomDate('01/01/2022', '31/12/2023'),
       description: faker.person.jobDescriptor(),
       state: faker.helpers.arrayElement(['ACTIVE', 'INACTIVE']),
