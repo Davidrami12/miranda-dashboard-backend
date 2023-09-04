@@ -32,21 +32,46 @@ const generateBooking = async () => {
 const generateRooms = async () => {
   const rooms = [];
   const facilities = ["AC", "Shower", "Towel", "Bathtub", "Coffee Set", "LED TV", "Wi-Fi"];
+  const images = [
+    "https://images.unsplash.com/photo-1562438668-bcf0ca6578f0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1760&q=80",
+    "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+    "https://images.unsplash.com/photo-1593006526979-5f8814c229f9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+    "https://images.unsplash.com/photo-1594563703937-fdc640497dcd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80",
+    "https://images.unsplash.com/photo-1572891086295-6c1c7c476549?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1112&q=80",
+    "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+    "https://plus.unsplash.com/premium_photo-1678297269904-6c46528b36a7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+    "https://images.unsplash.com/photo-1508253578933-20b529302151?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1661&q=80",
+    "https://plus.unsplash.com/premium_photo-1661964402307-02267d1423f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1073&q=80",
+    "https://images.unsplash.com/photo-1566195992011-5f6b21e539aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
+    "https://plus.unsplash.com/premium_photo-1661901997525-fdbfb88d8554?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=929&q=80",
+    "https://images.unsplash.com/photo-1444201983204-c43cbd584d93?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+  ];
+
+  const getRandomImage = () => {
+    const randomIndex = Math.floor(Math.random() * images.length);
+    return images.splice(randomIndex, 1)[0];
+  };
+  
   for (let i = 0; i < 10; i++) {
+    const discount = faker.helpers.arrayElement(['Yes', 'No']);
+    const room_rate = faker.number.int({ min: 10, max: 200 });
+    const discountPercent = faker.number.int({ min: 10, max: 90 });
+    const room_offer = discount === "Yes" ? room_rate * (1 - discountPercent / 100) : room_rate; // calculate price with or without discount
+    
     const room = {
       room_number: faker.number.int({min: 100, max: 900}),
-      photo: faker.image.urlLoremFlickr({ category: 'room' }),
+      photo: getRandomImage(),
       photoTwo: faker.image.url(),
       photoThree: faker.image.url(),
       photoFour: faker.image.url(),
       description: faker.lorem.paragraph(),
-      discountPercent: faker.number.int({ min: 10, max: 90 }),
-      discount: faker.helpers.arrayElement(['Yes', 'No']),
+      discountPercent: discountPercent,
+      discount: discount,
       cancellationPolicy: faker.lorem.paragraph(),
       bed_type: faker.helpers.arrayElement(['Single Bed', 'Double Bed', 'Double Superior', 'Suite']),
       room_facilities: generateRandomFacilities(facilities).join(', '),
-      room_rate: faker.number.int({ min: 10, max: 200 }),
-      room_offer: faker.datatype.boolean(),
+      room_rate: room_rate,
+      room_offer: room_offer,
       room_status: faker.helpers.arrayElement(['Available', 'Booked']),
     };
     rooms.push(room);

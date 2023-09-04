@@ -18,7 +18,6 @@ const userSchema = new Schema<UserInterface>({
   email: {
     type: String,
     required: true,
-    unique: true
   },
   phone: {
     type: String,

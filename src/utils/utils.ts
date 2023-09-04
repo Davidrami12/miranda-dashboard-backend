@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt';
+import bcryptjs from 'bcryptjs';
 import moment from 'moment';
 import { faker } from '@faker-js/faker';
 
@@ -8,7 +8,7 @@ const saltRounds: number = 10;
 // Functions to encrypt and compare passwords
 export const encryptPassword = async (password: string): Promise<string> => {
   try {
-    return await bcrypt.hash(password, saltRounds);
+    return await bcryptjs.hash(password, saltRounds);
 
   }catch (error) {
     throw new Error("Error hashing password");
@@ -17,7 +17,7 @@ export const encryptPassword = async (password: string): Promise<string> => {
 
 export const comparePassword = async (password: string, hash: string): Promise<boolean> => {
   try {
-    return await bcrypt.compare(password, hash);
+    return await bcryptjs.compare(password, hash);
 
   } catch (error) {
     throw new Error("Error comparing password");

@@ -30,7 +30,6 @@ const roomSchema = new Schema<RoomInterface>({
   },
   discountPercent: {
     type: Number,
-    required: true
   },
   discount: {
     type: String,
@@ -45,8 +44,7 @@ const roomSchema = new Schema<RoomInterface>({
     required: true
   },
   room_facilities: {
-    type: [String],
-    required: true
+    type: [String]
   },
   room_rate: {
     type: Number,
@@ -54,7 +52,6 @@ const roomSchema = new Schema<RoomInterface>({
   },
   room_offer: {
     type: Number,
-    required: true
   },
   room_status: {
     type: String,
