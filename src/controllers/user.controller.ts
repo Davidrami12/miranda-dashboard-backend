@@ -34,6 +34,7 @@ export const postUser = async (req: express.Request<{},{},UserInterface> , res: 
     res.status(201).json({ message: 'User successfully created!', user });
 
   } catch (error: any) {
+    console.log(error)
     res.status(500).json({ error: error.message });
   }
 };

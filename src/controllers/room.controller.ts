@@ -34,6 +34,7 @@ export const postRoom = async (req: express.Request<{},{},RoomInterface> , res: 
     res.status(201).json({ message: 'Room successfully created!', room });
 
   } catch (error: any) {
+    console.log(error)
     res.status(500).json({ error: error.message });
   }
 };
@@ -59,6 +60,7 @@ export const updateRoom = async (req: express.Request, res: express.Response) =>
     res.status(200).json({ message: "Room successfully updated", room });
 
   } catch (error: any) {
+    console.log(error)
     res.status(500).json({ error: error.message });
   }
 };
